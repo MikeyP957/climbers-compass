@@ -1,0 +1,8 @@
+{
+  "name": "climbers-compass",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:MikeyP957/climbers-compass.git",
+  "author": "MikeyP",
+  "license": "MIT"
+}
