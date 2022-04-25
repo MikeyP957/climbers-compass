@@ -9,8 +9,7 @@ const host = config.host as string;
 
 const app = express();
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.json()).use(express.urlencoded({ extended: false }));
 
 app.listen(port, host, () => {
   log.info(`server listening at http://${host}:${port}`);

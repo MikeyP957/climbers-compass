@@ -1,7 +1,5 @@
 {
-  "exclude": [
-    "**/*.spec.ts"
-  ],
+  "exclude": ["**/*.spec.ts"],
   "compilerOptions": {
     "target": "ES3",
     "module": "CommonJS",

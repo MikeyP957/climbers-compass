@@ -1,15 +1,12 @@
 import jwt from "jsonwebtoken";
 import config from "config";
 
-
 export function signJwt(
   object: Object,
   keyName: "accessTokenPrivateKey" | "refreshTokenPrivateKey",
   options?: jwt.SignOptions | undefined
 ) {
-  const signingKey = config.get<string>(keyName)
-
-
+  const signingKey = config.get<string>(keyName);
 
   return jwt.sign(object, signingKey);
 }
@@ -38,5 +35,3 @@ export function verifyJwt(
     };
   }
 }
-
-
