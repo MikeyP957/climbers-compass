@@ -1,7 +1,10 @@
 import { Express, Request, Response } from "express";
 
 // controllers
-import { createUserSessionHandler } from "../controller/session.controller";
+import {
+  createUserSessionHandler,
+  getUserSessionsHandler,
+} from "../controller/session.controller";
 import { createUserHandler } from "../controller/user.controller";
 
 // middleware
@@ -10,8 +13,9 @@ import validateResouce from "../middleware/validateResource";
 // schemas
 import { createUserSchema } from "../schema/user.schema";
 import { createSessionSchema } from "../schema/session.schema";
+import requireUser from "../middleware/requireUser";
 
-export default function (app: Express) {
+function routes(app: Express) {
   app.get("/healthcheck", (req: Request, res: Response) => res.sendStatus(200));
 
   // Register User
@@ -23,4 +27,8 @@ export default function (app: Express) {
     validateResouce(createSessionSchema),
     createUserSessionHandler
   );
+
+  app.get("/api/sessions", requireUser, getUserSessionsHandler);
 }
+
+export default routes;
