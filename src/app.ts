@@ -4,12 +4,18 @@ import log from "./logger";
 import connect from "./db/connect";
 import routes from "./routes";
 
+// middleware
+import deserializeUser from "./middleware/deserializeUser";
+
 const port = config.port as number;
 const host = config.host as string;
 
 const app = express();
 
-app.use(express.json()).use(express.urlencoded({ extended: false }));
+app
+  .use(express.json())
+  .use(express.urlencoded({ extended: false }))
+  .use(deserializeUser);
 
 app.listen(port, host, () => {
   log.info(`server listening at http://${host}:${port}`);
