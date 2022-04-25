@@ -9,20 +9,27 @@
   "scripts": {
     "dev": "nodemon --config nodemon.json src/app.ts",
     "test": "jest -c ./jest.unit.json"
-
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
+    "config": "^3.3.7",
+    "cors": "^2.8.5",
     "dayjs": "^1.11.1",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.3.0",
+    "nanoid": "^3.3.3",
     "nodemon": "^2.0.15",
+    "pino": "^7.10.0",
     "pino-pretty": "^7.6.1",
     "prettier": "^2.6.2",
     "ts-node": "^10.7.0",
     "typescript": "^4.6.3",
-    "yup": "^0.32.11"
+    "yup": "^0.32.11",
+    "zod": "^3.14.4"
   },
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
@@ -33,14 +40,15 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/jsonwebtoken": "^8.5.8",
-    "@types/lodash": "^4.14.181",
+    "@types/lodash": "^4.14.182",
     "@types/mongoose": "^5.11.97",
     "@types/nanoid": "^3.0.0",
-    "@types/node": "^17.0.24",
+    "@types/node": "^17.0.25",
     "@types/pino": "^7.0.5",
     "@types/yup": "^0.29.13",
     "jest": "^27.5.1",
     "supertest": "^6.2.2",
-    "ts-jest": "^27.1.4"
+    "ts-jest": "^27.1.4",
+    "ts-node-dev": "^1.1.8"
   }
 }
