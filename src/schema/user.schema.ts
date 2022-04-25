@@ -1,19 +1,26 @@
-import { object, string, ref } from "yup";
+import { object, string, TypeOf } from "zod";
 
 export const createUserSchema = object({
   body: object({
-    name: string().required("Name is required"),
-    password: string()
-      .required("passowrd is required")
-      .min(6, "Password is too short, must be at least 6 characters")
-      .matches(
-        /^[a-zA-Z0-9_.-]*$/,
-        "password can only contain letters and numbers"
-      ),
-    passwordConfirmation: string().oneOf(
-      [ref("password"), null],
-      "passwords must match"
-    ),
-    email: string().email("must be valid email").required("email is required"),
+    name: string({
+      required_error: "Name is required",
+    }),
+    password: string({
+      required_error: "Name is required",
+    }).min(6, "password must be at least 6 characters"),
+    passwordConfirmation: string({
+      required_error: "passwordConfirmation is requires",
+    }),
+    email: string({
+      required_error: "email is required",
+    }).email("Not a valid email"),
+  }).refine((data) => data.password === data.passwordConfirmation, {
+    message: "Passwords do not match",
+    path: ["passwordConfirmation"],
   }),
 });
+
+export type CreateUserInput = Omit<
+  TypeOf<typeof createUserSchema>,
+  "body.passwordConfirmation"
+>;
