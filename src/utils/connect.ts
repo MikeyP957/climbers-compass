@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 import config from "../../config/default";
-import log from "../logger";
+import log from "../utils/logger";
 
 function connect() {
   const dbUri = config.dbUri as string;
