@@ -1,6 +1,6 @@
 import { AnyZodObject } from "zod";
 import { Request, Response, NextFunction } from "express";
-import log from "../logger";
+import log from "../utils/logger";
 
 const validate =
   (schema: AnyZodObject) =>

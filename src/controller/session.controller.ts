@@ -12,7 +12,7 @@ import {
 import { signJwt } from "../utils/jwt.utils";
 
 import config from "config";
-import log from "../logger/index";
+import log from "../utils/logger";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
   // validate the email and password
