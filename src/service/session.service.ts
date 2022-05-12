@@ -8,6 +8,7 @@ import { findUser } from "./user.service";
 // Models
 import Session, { SessionDocument } from "../model/session.model";
 
+// helpers
 import { verifyJwt, signJwt } from "../utils/jwt.utils";
 
 export async function createSession(userId: string, userAgent: string) {
