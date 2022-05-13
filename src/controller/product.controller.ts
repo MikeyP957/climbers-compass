@@ -38,7 +38,7 @@ export async function updateProductHandler(
     if (!product) {
       return res.sendStatus(404);
     }
-    if (String(product.user) !== userId) {
+    if (product.user !== userId) {
       return res.sendStatus(403);
     }
     const updatedProduct = await findAndUpdateProduct({ productId }, update, {
@@ -60,7 +60,7 @@ export async function getProductHandler(
     const product = await findProduct({ productId });
 
     if (!product) {
-      res.sendStatus(404);
+      return res.sendStatus(404);
     }
 
     return res.send(product);
@@ -81,7 +81,7 @@ export async function deleteProductHandler(
     if (!product) {
       return res.sendStatus(404);
     }
-    if (String(product.user) !== userId) {
+    if (product.user !== userId) {
       return res.sendStatus(403);
     }
 

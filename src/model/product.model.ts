@@ -1,11 +1,13 @@
 import mongoose from "mongoose";
 import { customAlphabet } from "nanoid";
+import { string } from "yup";
 import { UserDocument } from "./user.model";
 
 const nanoid = customAlphabet("abcdefghijklmnopqrstuvwxyz0123456789", 10);
 
 export interface ProductDocument extends mongoose.Document {
   user: UserDocument["_id"];
+  productId: string;
   title: string;
   description: string;
   price: number;
