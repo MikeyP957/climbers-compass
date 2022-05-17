@@ -4,7 +4,9 @@ import User, { UserDocument } from "../model/user.model";
 
 export async function createUser(input: DocumentDefinition<UserDocument>) {
   try {
-    return await User.create(input);
+    const user = await User.create(input);
+
+    return omit(user.toJSON(), "password");
   } catch (error) {
     throw new Error(`${error}`);
   }
