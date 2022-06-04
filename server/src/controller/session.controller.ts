@@ -13,6 +13,7 @@ import { signJwt } from "../utils/jwt.utils";
 
 import config from "config";
 import log from "../utils/logger";
+import { secureHeapUsed } from "crypto";
 
 export async function createUserSessionHandler(req: Request, res: Response) {
   // validate the email and password
@@ -38,6 +39,23 @@ export async function createUserSessionHandler(req: Request, res: Response) {
     "refreshTokenPrivateKey",
     { expiresIn: config.get("refreshTokenTtl") }
   );
+
+  res.cookie("accessToken", accessToken, {
+    maxAge: 900000, // 15 minutes
+    httpOnly: true,
+    domain: "localhost",
+    path: "/",
+    sameSite: "strict",
+    secure: false,
+  });
+  res.cookie("refreshToken", refreshToken, {
+    maxAge: 3.154e10, // 1 year
+    httpOnly: true,
+    domain: "localhost",
+    path: "/",
+    sameSite: "strict",
+    secure: false,
+  });
 
   // send refresh and access token
   return res.send({ accessToken, refreshToken });

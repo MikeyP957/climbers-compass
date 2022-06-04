@@ -6,7 +6,7 @@ import {
   deleteSessionHandler,
   getUserSessionsHandler,
 } from "../controller/session.controller";
-import { createUserHandler } from "../controller/user.controller";
+import { createUserHandler, getCurrentUser } from "../controller/user.controller";
 import {
   createProductHandler,
   deleteProductHandler,
@@ -34,6 +34,8 @@ function routes(app: Express) {
   // Register User
   app.post("/api/users", validateResouce(createUserSchema), createUserHandler);
 
+  app.get('/api/me', requireUser, getCurrentUser)
+
   // Login
   app.post(
     "/api/sessions",
@@ -45,6 +47,7 @@ function routes(app: Express) {
 
   app.delete("/api/sessions", requireUser, deleteSessionHandler);
 
+  // Product Routes
   app.post(
     "/api/products",
     [requireUser, validateResouce(createProductSchema)],

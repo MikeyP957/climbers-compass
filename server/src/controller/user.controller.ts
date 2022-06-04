@@ -13,3 +13,7 @@ export async function createUserHandler(req: Request, res: Response) {
     res.status(409).send(error.message);
   }
 }
+
+export async function getCurrentUser(req: Request, res: Response) {
+  return res.send(res.locals.user)
+}
