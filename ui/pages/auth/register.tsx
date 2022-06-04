@@ -1,6 +1,8 @@
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { object, string } from "zod";
+import { object, set, string, TypeOf } from "zod";
 
 const createUserSchema = object({
   name: string({
@@ -20,21 +22,33 @@ const createUserSchema = object({
   path: ["passwordConfirmation"],
 });
 
+type CreateUserInput = TypeOf<typeof createUserSchema>;
+
 function RegisterPage() {
+  const [registerError, setRegisterError] = useState(null);
+
   const {
     register,
     formState: { errors },
     handleSubmit,
-  } = useForm({
+  } = useForm<CreateUserInput>({
     resolver: zodResolver(createUserSchema),
   });
 
-  function onSubmit(values: any) {
-    console.log({ values });
+  async function onSubmit(values: CreateUserInput) {
+    try {
+      await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/api/users`,
+        values
+      );
+    } catch (err: any) {
+      setRegisterError(err.message);
+    }
   }
 
   return (
     <>
+      <p>{registerError}</p>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-element">
           <label htmlFor="email">Email</label>
