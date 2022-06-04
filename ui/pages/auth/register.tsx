@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 import axios from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { object, set, string, TypeOf } from "zod";
+import { object, string, TypeOf } from "zod";
 
 const createUserSchema = object({
   name: string({
@@ -25,6 +26,7 @@ const createUserSchema = object({
 type CreateUserInput = TypeOf<typeof createUserSchema>;
 
 function RegisterPage() {
+  const router = useRouter();
   const [registerError, setRegisterError] = useState(null);
 
   const {
@@ -41,6 +43,8 @@ function RegisterPage() {
         `${process.env.NEXT_PUBLIC_SERVER_ENDPOINT}/api/users`,
         values
       );
+      // after user created redirect to home
+      router.push("/");
     } catch (err: any) {
       setRegisterError(err.message);
     }
