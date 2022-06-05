@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import deserializeUser from "../middleware/deserializeUser";
 import routes from "../routes";
 import config from "../../config/default";
@@ -14,6 +15,7 @@ function createServer() {
         credentials: true,
       })
     )
+    .use(cookieParser())
     .use(express.json())
     .use(express.urlencoded({ extended: false }))
     .use(deserializeUser);
